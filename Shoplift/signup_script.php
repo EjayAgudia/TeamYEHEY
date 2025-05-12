@@ -24,7 +24,7 @@ if ($num != 0) {
     header('location: index.php?error=' . $m);
 
 } else {
-    $quer = "INSERT INTO users(email_id,first_name,last_name,password) values('$email','$first','$last','$pass')";
+    $quer = "INSERT INTO users(email_id, first_name, last_name, password, role) values('$email', '$first', '$last', '$pass', 'user')";
     mysqli_query($con, $quer);
 
     echo "New record has id: " . mysqli_insert_id($con);

@@ -1,5 +1,5 @@
 <?php
-require 'includes/common.php';
+require 'db_connect.php';
 session_start();
 
 // Debug session to check what is available
@@ -16,9 +16,9 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 
     // If user_id is not in session, try to fetch it via email
     if (!$user_id && isset($_SESSION['email'])) {
-        $email = mysqli_real_escape_string($con, $_SESSION['email']);
-        $query_user = "SELECT id FROM users WHERE email = '$email' LIMIT 1";
-        $result_user = mysqli_query($con, $query_user);
+        $email = mysqli_real_escape_string($conn, $_SESSION['email']);
+        $query_user = "SELECT id FROM users WHERE email_id = '$email' LIMIT 1";
+        $result_user = mysqli_query($conn, $query_user);
 
         if ($result_user && mysqli_num_rows($result_user) === 1) {
             $row = mysqli_fetch_assoc($result_user);
@@ -34,29 +34,29 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
         // Prevent duplicate entries by checking if the item is already in the cart
         $check_query = "
             SELECT 1 FROM users_products 
-            WHERE user_id = $user_id AND item_id = $item_id
+            WHERE user_id = $user_id AND item_id = $item_id AND status = 'Added To Cart'
             LIMIT 1
         ";
-        $check_result = mysqli_query($con, $check_query);
+        $check_result = mysqli_query($conn, $check_query);
 
         if (!$check_result) {
-            die('Database error during check: ' . mysqli_error($con));
+            die('Database error during check: ' . mysqli_error($conn));
         }
 
         if (mysqli_num_rows($check_result) === 0) {
             // Item not yet in cart; insert it
             $insert_query = "
                 INSERT INTO users_products (user_id, item_id, status)
-                VALUES ($user_id, $item_id, 'Added to Cart')
+                VALUES ($user_id, $item_id, 'Added To Cart')
             ";
 
-            if (mysqli_query($con, $insert_query)) {
+            if (mysqli_query($conn, $insert_query)) {
                 // Redirect with success message
                 header('Location: products.php?success=added');
                 exit();
             } else {
                 // Handle query error
-                die('Database error during insert: ' . mysqli_error($con));
+                die('Database error during insert: ' . mysqli_error($conn));
             }
         } else {
             // Already in cart, just redirect back

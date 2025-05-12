@@ -9,6 +9,11 @@ function check_if_added_to_cart($item_id, $conn) {
 
     $result = mysqli_query($conn, $query);
 
+    if (!$result) {
+        error_log("Database error in check_if_added_to_cart: " . mysqli_error($conn));
+        return false;
+    }
+
     return mysqli_num_rows($result) >= 1;
 }
 

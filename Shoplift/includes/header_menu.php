@@ -1,5 +1,5 @@
 <!-- Navigation bar start -->
-<nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-danger bg-opacity-75 shadow-sm">
+<nav class="navbar fixed-top navbar-expand-sm navbar-dark bg-danger bg-opacity-75 shadow-sm">
     <div class="container">
         <a href="index.php" class="navbar-brand" style="font-family: 'Delius Swash Caps'; font-size: 1.5rem;">Shoplift</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mynavbar" aria-controls="mynavbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -7,14 +7,14 @@
         </button>
 
         <div class="collapse navbar-collapse" id="mynavbar">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav">
                 <li class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" id="navbar-drop" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbar-drop" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         Products
                     </a>
-                    <div class="dropdown-menu" aria-labelledby="navbar-drop">
-                        <a href="products.php#watches" class="dropdown-item">Watches</a>
-                        <a href="products.php#tshirts" class="dropdown-item">T-Shirts</a>
+                    <div class="dropdown-menu">
+                        <a href="products.php#watch" class="dropdown-item">Watches</a>
+                        <a href="products.php#shirt" class="dropdown-item">T-Shirts</a>
                         <a href="products.php#shoes" class="dropdown-item">Shoes</a>
                         <a href="products.php#headphones" class="dropdown-item">Headphones/Speakers</a>
                     </div>
